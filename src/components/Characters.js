@@ -1,5 +1,7 @@
-import {useState, useEffect,useReducer, useMemo, useRef} from 'react'
+import {useState, useEffect,useReducer, useMemo, useRef, useCallback} from 'react'
 import Character from './Character'
+import Search from './Search'
+
 const initialState = {
     favorites:[]
 }
@@ -35,9 +37,12 @@ const Characters = ()=>{
         dispatch({type:"ADD_TO_FAVORITE", payload:favorite}) 
     }
 
-    const handleOnChange = ()=>{
-        setSearch(searchInput.current.value)
-    }
+    const handleOnChange = useCallback(
+        ()=>{
+            setSearch(searchInput.current.value)
+        },[]
+    )
+        
     const filteredCharacteres = useMemo(
         ()=>{
             return characters.filter((item)=> item.name.toLowerCase().includes(search.toLocaleLowerCase()))
@@ -50,7 +55,7 @@ const Characters = ()=>{
             <div className="Characters-Container">
                 {favorites.favorites.map(item =><Character key={item.id} name={item.name} url={item.image} type="favorite" />)}
             </div>
-            <input type="text" value={search}  onChange={handleOnChange} ref={searchInput}/>
+            <Search search={search} searchInput={searchInput} handleOnChange={handleOnChange}/>
             <h2 className="Characters-Title">Characters</h2>
             <div className="Characters-Container">
                 {filteredCharacteres.map(item =><Character key={item.id} name={item.name} url={item.image} handleClick={()=> handleClick(item)} />)}
