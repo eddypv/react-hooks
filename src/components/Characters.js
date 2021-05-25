@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Character from './Character'
 const Characters = ()=>{
     
     const [characters, setCharacters] = useState([])
@@ -13,8 +14,10 @@ const Characters = ()=>{
     },[])
     return(
         <div className="Characters">
-            <h2>Characters</h2>
-            {characters.map(item =>{ return <p>{item.name}</p>})}
+            <h2 className="Characters-Title">Characters</h2>
+            <div className="Characters-Container">
+                {characters.map(item =><Character key={item.id} name={item.name} url={item.image} />)}
+            </div>
         </div>
     ) 
 }

@@ -27,6 +27,36 @@
 .App-link {
   color: #61dafb;
 }
+.Characters{
+  padding: 2em;
+}
+.Characters-Container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.Ligth-Mode{
+  background-color: white;
+}
+.Dark-Mode{
+  background-color: black;
+}
+
+.Ligth-Mode .Header-Title,
+.Ligth-Mode .Character-Title,
+.Ligth-Mode .Characters-Title{
+  color: black;
+}
+
+.Dark-Mode .Header-Title,
+.Dark-Mode .Character-Title,
+.Dark-Mode .Characters-Title{
+  color: white;
+}
+
+
+
 
 @keyframes App-logo-spin {
   from {

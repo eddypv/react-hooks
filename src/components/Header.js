@@ -1,16 +1,31 @@
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import ThemeContext from '../context/ThemeContext'
 const Header = ()=>{
+    const {theme, setTheme} = useContext(ThemeContext)
     const [darkMode, setDarkMode] = useState(false)
-    const color = useContext(ThemeContext)
+    useEffect(()=>{
+        if(theme === "Ligth-Mode"){
+            setDarkMode(false)
+        }else{
+            setDarkMode(true)
+        }
+    },[theme])
+    
     const handleClick = () =>{
-        setDarkMode(!darkMode)
+        const changeDarkMode = !darkMode 
+        if(changeDarkMode){
+            setTheme("Dark-Mode")
+        }else{
+            setTheme("Ligth-Mode")
+        }
+        setDarkMode(changeDarkMode)
+         
     }
     
     return(
         <div className="Header">
-            <h1 style={{color:color}}>React Hooks</h1>
-            <button type="button" onClick={handleClick}>{darkMode ? "Dark":"Ligth" } Mode</button>
+            <h1 className="Header-Title">React Hooks</h1>
+            <button type="button" onClick={handleClick}>{darkMode ? "Ligth":"Dark" } Mode</button>
         </div>
     )
 }
